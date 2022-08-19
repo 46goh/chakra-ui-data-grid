@@ -7,7 +7,7 @@ import useDataGrid from "../../../src/hooks/useDataGrid";
 
 import { generateRows, columns } from "./testData";
 
-const rows = generateRows(10000);
+const rows = generateRows(1000);
 
 export default {
   title: "DataGrid/main",
@@ -27,13 +27,12 @@ export const Basic = Template.bind({});
 
 export const WithOnClick = Template.bind({});
 WithOnClick.args = {
-  onClickRow: action("onClickRow"),
+  availableDetailDrawer: true,
 };
 
 export const NoData = Template.bind({});
 NoData.args = {
   rows: [],
-  onClickRow: action("onClickRow"),
 };
 
 export const Filtered = () => {
@@ -66,7 +65,7 @@ export const FilteredAndOnClick = () => {
       columns={columns}
       rows={filteredRows}
       filterPropsList={filterPropsList}
-      onClickRow={action("onClickRow")}
+      availableDetailDrawer
     />
   );
 };

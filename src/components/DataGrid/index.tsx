@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { useState, useMemo, forwardRef, useCallback } from "react";
 import {
   Box,
   Table,
@@ -15,6 +15,7 @@ import { ChevronRightIcon } from "@chakra-ui/icons";
 import { TableVirtuoso } from "react-virtuoso";
 
 import Filter, { FilterProps } from "./filters";
+import DetailDrawer from "./DetailDrawer";
 
 import { toStringValue } from "../../lib/stringUtil";
 
@@ -23,17 +24,26 @@ type Props<T extends DataGrid.TableRow> = {
   rows: T[];
   filterPropsList?: FilterProps[];
   height: BoxProps["height"]; // heightの指定は必須
-  onClickRow?: (row: T) => void;
+  availableDetailDrawer?: boolean;
+  detailTitle?: string;
 } & Omit<BoxProps, "height">;
 
 export default function DataGrid<TRow extends DataGrid.TableRow>({
   columns,
   rows,
-  onClickRow,
+  availableDetailDrawer,
   filterPropsList,
   height,
+  detailTitle,
   ...boxProps
 }: Props<TRow>) {
+  const [selectedRow, setSelectedRow] = useState<TRow | undefined>(undefined);
+  const isOpen = useMemo(() => !!selectedRow, [selectedRow]);
+  const onClose = useCallback(
+    () => setSelectedRow(undefined),
+    [setSelectedRow]
+  );
+
   return (
     <Box {...boxProps} height={height}>
       <TableVirtuoso<TRow>
@@ -51,7 +61,7 @@ export default function DataGrid<TRow extends DataGrid.TableRow>({
         fixedHeaderContent={() => (
           <>
             <Tr>
-              {onClickRow && (
+              {availableDetailDrawer && (
                 <Th
                   borderBottomWidth={0}
                   position="sticky"
@@ -70,7 +80,7 @@ export default function DataGrid<TRow extends DataGrid.TableRow>({
             </Tr>
             {filterPropsList && (
               <Tr>
-                {onClickRow && (
+                {availableDetailDrawer && (
                   <Th
                     position="sticky"
                     left={0}
@@ -91,7 +101,7 @@ export default function DataGrid<TRow extends DataGrid.TableRow>({
                   position="sticky"
                   left={0}
                   backgroundColor="white"
-                  colSpan={columns.length + (onClickRow ? 1 : 0)}
+                  colSpan={columns.length + (availableDetailDrawer ? 1 : 0)}
                 >
                   <Text position="sticky" left={4} as="i">
                     データがありません
@@ -104,13 +114,13 @@ export default function DataGrid<TRow extends DataGrid.TableRow>({
         itemContent={(_index, row) => {
           return (
             <>
-              {onClickRow && (
+              {availableDetailDrawer && (
                 <Td position="sticky" left={0} backgroundColor="white">
                   <Button
                     size="sm"
                     bgColor="white"
                     variant="outline"
-                    onClick={() => onClickRow(row)}
+                    onClick={() => setSelectedRow(row)}
                     rightIcon={<ChevronRightIcon />}
                   >
                     詳細
@@ -126,6 +136,15 @@ export default function DataGrid<TRow extends DataGrid.TableRow>({
           );
         }}
       />
+      {availableDetailDrawer && (
+        <DetailDrawer
+          isOpen={isOpen}
+          onClose={onClose}
+          columns={columns}
+          title={detailTitle ?? ""}
+          selectedRow={selectedRow}
+        />
+      )}
     </Box>
   );
 }
