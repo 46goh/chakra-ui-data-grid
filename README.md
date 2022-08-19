@@ -2,7 +2,7 @@ This is a sample implementation of a DataGrid using chakra UI.
 
 
 Feel free to test from:
-https://chakra-ui-data-grid.vercel.app/
+https://chakra-ui-data-grid.46goh.vercel.app
 
 With this component, You can:
 
