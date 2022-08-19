@@ -2,10 +2,10 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import SelectFilter from "../../../../src/components/DataGrid/filters/SelectFilter";
+import SelectFilter from "../../../../../src/components/molecules/DataGrid/filters/SelectFilter";
 
 export default {
-  title: "DataGrid/filters/SelectFilter",
+  title: "molecules/DataGrid/filters/SelectFilter",
   component: SelectFilter,
   args: {
     keyId: "selectFilterStory",

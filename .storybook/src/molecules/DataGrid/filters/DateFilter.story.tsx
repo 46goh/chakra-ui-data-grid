@@ -2,11 +2,11 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import DateFilter from "../../../../src/components/DataGrid/filters/DateFilter";
-import { dayjs } from "../../../../src/lib/timeUtil";
+import DateFilter from "../../../../../src/components/molecules/DataGrid/filters/DateFilter";
+import { dayjs } from "../../../../../src/lib/timeUtil";
 
 export default {
-  title: "DataGrid/filters/DateFilter",
+  title: "molecules/DataGrid/filters/DateFilter",
   component: DateFilter,
   args: {
     keyId: "dateFilterStory",

@@ -2,10 +2,10 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
-import StringFilter from "../../../../src/components/DataGrid/filters/StringFilter";
+import StringFilter from "../../../../../src/components/molecules/DataGrid/filters/StringFilter";
 
 export default {
-  title: "DataGrid/filters/StringFilter",
+  title: "molecules/DataGrid/filters/StringFilter",
   component: StringFilter,
   args: {
     keyId: "stringFilterStory",

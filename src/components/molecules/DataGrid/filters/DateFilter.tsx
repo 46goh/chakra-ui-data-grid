@@ -17,7 +17,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { CheckIcon, ChevronDownIcon, CloseIcon } from "@chakra-ui/icons";
-import { dayjs } from "../../../lib/timeUtil";
+import { dayjs } from "../../../../lib/timeUtil";
 
 type DateRangeString = [string, string];
 

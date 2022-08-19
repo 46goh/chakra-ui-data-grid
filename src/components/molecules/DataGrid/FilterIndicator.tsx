@@ -10,7 +10,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { Search2Icon, ChevronDownIcon } from "@chakra-ui/icons";
-import { dayjs } from "../../lib/timeUtil";
+import { dayjs } from "../../../lib/timeUtil";
 
 // chakra-ui issue
 // https://github.com/chakra-ui/chakra-ui/issues/5896#issuecomment-1104085557

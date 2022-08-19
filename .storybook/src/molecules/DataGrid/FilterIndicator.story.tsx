@@ -1,11 +1,11 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { columns } from "./testData";
+import { columns } from "../../../../src/lib/sampleData";
 
-import FilterIndicator from "../../../src/components/DataGrid/FilterIndicator";
+import FilterIndicator from "../../../../src/components/molecules/DataGrid/FilterIndicator";
 
 export default {
-  title: "DataGrid/filters/FilterIndicator",
+  title: "molecules/DataGrid/FilterIndicator",
   component: FilterIndicator,
   args: {
     columns,

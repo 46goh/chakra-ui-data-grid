@@ -1,6 +1,6 @@
-// DataGridのStorybook用に使うテストデータ
+// DataGridのテストに使うデータ
 
-export type TestObject = {
+export type SampleObject = {
   id: string;
   name: string;
   status: string;
@@ -71,7 +71,7 @@ const HEALTH_EXAMPLES = [
   "健康状態9",
 ]; // 9件
 
-export const generateRows = (max: number): TestObject[] => {
+export const generateRows = (max: number): SampleObject[] => {
   return new Array(max).fill(0).map((_, i) => ({
     id: i.toString().padStart(9, "0"),
     name: `${LAST_NAME_EXAMPLES[i % LAST_NAME_EXAMPLES.length]} ${
@@ -85,42 +85,49 @@ export const generateRows = (max: number): TestObject[] => {
   }));
 };
 
-export const columns: DataGrid.ColumnDefinition<TestObject>[] = [
+export const columns: DataGrid.ColumnDefinition<SampleObject>[] = [
   {
     key: "id",
     label: "ID",
     filterType: "NONE",
+    width: "100px",
   },
   {
     key: "name",
     label: "氏名",
     filterType: "STRING",
+    width: "100px",
   },
   {
     key: "status",
     label: "ステータス",
     filterType: "SELECT",
     filterModel: STATUS_EXAMPLES,
+    width: "100px",
   },
   {
     key: "health",
     label: "健康状態",
     filterType: "SELECT",
     filterModel: HEALTH_EXAMPLES,
+    width: "100px",
   },
   {
     key: "createdAt",
     label: "作成日",
     filterType: "DATE",
+    width: "100px",
   },
   {
     key: "updatedAt",
     label: "更新日",
     filterType: "DATE",
+    width: "100px",
   },
   {
     key: "remarks",
     label: "備考",
     filterType: "STRING",
+    width: "100px",
   },
 ];

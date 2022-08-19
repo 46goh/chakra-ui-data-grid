@@ -2,15 +2,15 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import DataGrid from "../../../src/components/DataGrid";
-import useDataGrid from "../../../src/hooks/useDataGrid";
+import DataGrid from "../../../../src/components/molecules/DataGrid";
+import useDataGrid from "../../../../src/hooks/useDataGrid";
 
-import { generateRows, columns } from "./testData";
+import { generateRows, columns } from "../../../../src/lib/sampleData";
 
 const rows = generateRows(1000);
 
 export default {
-  title: "DataGrid/main",
+  title: "molecules/DataGrid",
   component: DataGrid,
   args: {
     height: "100vh",
@@ -27,7 +27,7 @@ export const Basic = Template.bind({});
 
 export const WithOnClick = Template.bind({});
 WithOnClick.args = {
-  availableDetailDrawer: true,
+  onClickRow: action("onClickRow"),
 };
 
 export const NoData = Template.bind({});
@@ -65,7 +65,7 @@ export const FilteredAndOnClick = () => {
       columns={columns}
       rows={filteredRows}
       filterPropsList={filterPropsList}
-      availableDetailDrawer
+      onClickRow={action("onClickRow")}
     />
   );
 };

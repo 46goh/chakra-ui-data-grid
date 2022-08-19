@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { dayjs } from "../lib/timeUtil";
-import { FilterProps } from "../components/DataGrid/filters";
+import { FilterProps } from "../components/molecules/DataGrid/filters";
 
 function escapeRegExp(value: string) {
   return value.replace(/[.*+?^=!:${}()|[\]\\/]/g, "\\$&");
