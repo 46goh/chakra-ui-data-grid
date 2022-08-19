@@ -2,13 +2,20 @@ import { useMemo, useState } from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 
 import DataGrid from "../molecules/DataGrid";
+import FilterCount from "../molecules/DataGrid/FilterCount";
 import FilterIndicator from "../molecules/DataGrid/FilterIndicator";
-import { SampleObject, generateRows, columns } from "../../lib/sampleData";
-import useDataGrid from "../../hooks/useDataGrid";
+import CSVDownloadButton from "../molecules/CSVDownloadButton";
 import DetailDrawer from "../molecules/DataGrid/DetailDrawer";
 
+import useDataGrid from "../../hooks/useDataGrid";
+import useCsvDownload from "../../hooks/useCsvDownload";
+
+import { SampleObject, generateRows, columns } from "../../lib/sampleData";
+
+const TEST_RECORD_LENGTH = 1000;
+
 export default function DataGridSample() {
-  const rows = useMemo(() => generateRows(1000), []);
+  const rows = useMemo(() => generateRows(TEST_RECORD_LENGTH), []);
   const [selectedData, setSelectedData] = useState<SampleObject | undefined>(
     undefined
   );
@@ -16,10 +23,24 @@ export default function DataGridSample() {
     rows,
     columns
   );
+  const downloadCsv = useCsvDownload("userlist", columns, filteredRows);
   return (
-    <Flex direction="column" gap={4} alignItems="flex-start">
+    <Flex direction="column" gap={4}>
       <Heading as="h2">ユーザ一覧</Heading>
-      <FilterIndicator columns={columns} filterMap={filterMap} />
+      <Flex direction="row" justifyContent="space-between">
+        <FilterCount
+          currentLength={filteredRows.length}
+          maxLength={TEST_RECORD_LENGTH}
+        />
+        <Flex flexGrow={1} justifyContent="flex-end" gap={4}>
+          <FilterIndicator columns={columns} filterMap={filterMap} />
+          <CSVDownloadButton
+            onCsvDownload={downloadCsv}
+            disabled={!filteredRows.length}
+          />
+        </Flex>
+      </Flex>
+
       <Box width="full" overflowX="scroll" wordBreak="keep-all">
         <DataGrid<SampleObject>
           height="calc(100vh - 200px)"
