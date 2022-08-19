@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { Box, Flex, Heading } from "@chakra-ui/react";
 
 import DataGrid from "../molecules/DataGrid";
@@ -10,17 +10,18 @@ import DetailDrawer from "../molecules/DataGrid/DetailDrawer";
 import useDataGrid from "../../hooks/useDataGrid";
 import useCsvDownload from "../../hooks/useCsvDownload";
 
-import { SampleObject, generateRows, columns } from "../../lib/sampleData";
+import { SampleObject, columns } from "../../lib/sampleData";
 
-const TEST_RECORD_LENGTH = 1000;
+type Props = {
+  records: SampleObject[];
+};
 
-export default function DataGridSample() {
-  const rows = useMemo(() => generateRows(TEST_RECORD_LENGTH), []);
+export default function DataGridSample({ records }: Props) {
   const [selectedData, setSelectedData] = useState<SampleObject | undefined>(
     undefined
   );
   const { filterPropsList, filteredRows, filterMap } = useDataGrid(
-    rows,
+    records,
     columns
   );
   const downloadCsv = useCsvDownload("userlist", columns, filteredRows);
@@ -30,7 +31,7 @@ export default function DataGridSample() {
       <Flex direction="row" justifyContent="space-between">
         <FilterCount
           currentLength={filteredRows.length}
-          maxLength={TEST_RECORD_LENGTH}
+          maxLength={records.length}
         />
         <Flex flexGrow={1} justifyContent="flex-end" gap={4}>
           <FilterIndicator columns={columns} filterMap={filterMap} />

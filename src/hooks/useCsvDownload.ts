@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { stringify } from "csv-stringify";
+import { stringify } from "csv-stringify/browser/esm";
 import Encoding from "encoding-japanese";
 import { toStringValue } from "../lib/stringUtil";
 
