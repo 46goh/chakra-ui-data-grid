@@ -1,0 +1,7 @@
+{
+  "src/**/*.{ts,tsx}": [
+    "bash -c 'npm run type-check'",
+    "eslint --fix",
+    "prettier --write"
+  ]
+}
