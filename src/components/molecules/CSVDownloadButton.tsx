@@ -6,6 +6,7 @@ import {
   MenuList,
   MenuItem,
   ButtonProps,
+  Portal,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, DownloadIcon } from "@chakra-ui/icons";
 
@@ -36,16 +37,18 @@ export default function CSVDownloadButton({
       >
         CSVダウンロード
       </MenuButton>
-      <MenuList>
-        <MenuItem onClick={onClickDownloadShiftJisCsv}>
-          <DownloadIcon />
-          Windows用(Shift_JIS)
-        </MenuItem>
-        <MenuItem onClick={onClickDownloadUtf8Csv}>
-          <DownloadIcon />
-          mac用(UTF-8)
-        </MenuItem>
-      </MenuList>
+      <Portal>
+        <MenuList>
+          <MenuItem onClick={onClickDownloadShiftJisCsv}>
+            <DownloadIcon />
+            Windows用(Shift_JIS)
+          </MenuItem>
+          <MenuItem onClick={onClickDownloadUtf8Csv}>
+            <DownloadIcon />
+            mac用(UTF-8)
+          </MenuItem>
+        </MenuList>
+      </Portal>
     </Menu>
   );
 }
